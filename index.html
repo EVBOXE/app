@@ -17,7 +17,8 @@
   --safe-bot: env(safe-area-inset-bottom, 0px);
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-body{background:var(--bg);color:var(--text);font-family:-apple-system,sans-serif;
+body{background:var(--bg);color:var(--text);font-family:-apple-system,'SF Pro Rounded','Helvetica Neue',sans-serif;
+  font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;
   padding-bottom:calc(70px + var(--safe-bot));}
 #scroll-area{padding:0 16px 24px;padding-top:16px;}
 
@@ -32,7 +33,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,sans-serif
 /* ── Header ── */
 .day-header{margin-bottom:20px}
 .day-header h1{font-size:30px;font-weight:900;letter-spacing:-.5px}
-.day-header .sub{font-size:15px;color:var(--muted);margin-top:5px}
+.day-header .sub{font-size:16px;color:var(--muted);margin-top:5px}
 .session-date{font-size:14px;font-weight:600;color:var(--accent);margin-top:6px;letter-spacing:.02em;text-transform:capitalize}
 .agi-date{margin:0 0 10px 0;padding:4px 10px;background:rgba(255,255,255,.06);border-radius:6px;display:inline-block}
 .accent-bar{height:3px;width:40px;border-radius:2px;margin-top:10px}
@@ -56,7 +57,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,sans-serif
 .ex-card-head{display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer}
 .ex-num{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;
   justify-content:center;font-size:12px;font-weight:800;flex-shrink:0;background:var(--acc);color:#fff}
-.ex-name{font-size:17px;font-weight:800;flex:1}
+.ex-name{font-size:18px;font-weight:800;flex:1}
 .ex-tag{font-size:10px;font-weight:700;padding:3px 8px;border-radius:10px;
   background:rgba(255,255,255,.07);color:var(--muted)}
 .ex-chevron{font-size:12px;color:var(--muted);transition:.25s}
@@ -66,8 +67,8 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,sans-serif
 .ex-reps{font-size:26px;font-weight:900;letter-spacing:-.5px}
 .ex-reps small{font-size:15px;font-weight:400;color:var(--muted)}
 .ex-video{width:100%;border-radius:10px;display:block;background:#000}
-.ex-note{font-size:15px;color:var(--muted);line-height:1.6;border-left:3px solid var(--border);padding-left:10px}
-.ex-cue{font-size:14px;font-style:italic;color:#aaa;background:var(--card2);border-radius:8px;padding:10px 12px;margin-top:2px}
+.ex-note{font-size:16px;color:var(--muted);line-height:1.65;border-left:3px solid var(--border);padding-left:10px}
+.ex-cue{font-size:15px;font-style:italic;color:#aaa;background:var(--card2);border-radius:8px;padding:10px 12px;margin-top:2px}
 .ex-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .yt-btn{background:#ff0000;color:#fff;border:none;border-radius:8px;
   padding:7px 14px;font-size:12px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block}
@@ -1374,219 +1375,265 @@ const DB = {
   /* ESPLOSIVITÀ */
   'squat-jump': { name:'Squat Jump', tag:'Esplosività', family:'jump', scaling:2,
     note:'Piedi larghezza spalle, discesa rapida, decollo verticale. Atterraggio morbido in tripla flessione — ginocchia, anche, caviglie.',
+    notePT:'Pés à largura dos ombros, descida rápida, impulso vertical. Aterragem suave em tripla flexão — joelhos, ancas, tornozelos.',
     cue:'"Atterra morbido, rimbalza come una molla"',
     vid:MW+'male-Bodyweight-jump-squats-front.mp4', yt:null },
   'jumping-lunge': { name:'Jumping Lunge', tag:'Esplosività', family:'jump', scaling:2,
     note:'Posizione di affondo, salto esplosivo con cambio di gamba in volo. Atterraggio morbido. Focus sulla reattività del ciclo stiramento-accorciamento.',
+    notePT:'Posição de afundo, salto explosivo com troca de perna no ar. Aterragem suave. Foco na reatividade do ciclo de alongamento-encurtamento.',
     cue:'"Scambia veloce, atterraggi silenziosi"',
     vid:null, yt:'_5kDxC0flg0' },
   'med-ball-slam': { name:'Med Ball Slam', tag:'Esplosività', family:'slam', scaling:1,
     note:'Slancio dalla presa alta, contrazione totale in basso. MB 4–6 kg. La potenza viene dai fianchi e dal core, non dalle braccia.',
+    notePT:'Balanço a partir da pegada alta, contração total em baixo. MB 4–6 kg. A potência vem das ancas e do core, não dos braços.',
     cue:'"Schiaccia il pavimento con la palla"',
     vid:null, yt:'QxYhFwMd1Ks' },
   'tuck-jump': { name:'Tuck Jump', tag:'Esplosività', family:'jump', scaling:2,
     note:'Salto verticale massimo portando le ginocchia al petto in cima. Atterraggio morbido, immediatamente pronto per il prossimo salto.',
+    notePT:'Salto vertical máximo levando os joelhos ao peito no topo. Aterragem suave, imediatamente pronto para o próximo salto.',
     cue:'"Porta le ginocchia al petto, non il petto alle ginocchia"',
     vid:null, yt:'ZR6aFqdRi2Y' },
   'broad-jump': { name:'Broad Jump', tag:'Esplosività', family:'jump', scaling:2,
     note:'Salto orizzontale massimo con caricamento delle anche. Atterraggio bipodalico stabile — punteggio = distanza.',
+    notePT:'Salto horizontal máximo com carregamento das ancas. Aterragem bipodalica estável — pontuação = distância.',
     cue:'"Carica le anche, esplodi in avanti"',
     vid:null, yt:'uhz-ia-2UcM' },
   'burpee': { name:'Burpee', tag:'Esplosività', family:'full-body', scaling:1,
     note:'Sequenza: in piedi → plank → push-up → salto. Corpo rigido nel plank, petto tocca il suolo. Variante base: senza push-up o con step invece del salto.',
+    notePT:'Sequência: em pé > prancha > push-up > salto. Corpo rígido na prancha, peito toca o chão. Variante base: sem push-up ou com step em vez do salto.',
     cue:'"Fai fluire il movimento, non spezzarlo"',
     vid:MW+'male-bodyweight-burpee-front.mp4', yt:null },
 
   /* SPINTA */
   'pushup': { name:'Push-up', tag:'Spinta orizz.', family:'pushup', scaling:2,
     note:'Corpo rigido dalla testa ai talloni. Petto tocca il suolo, gomiti a 45°. Variante base: da ginocchia o mani rialzate su step.',
+    notePT:'Corpo rígido da cabeça aos calcanhares. Peito toca o chão, cotovelos a 45°. Variante base: de joelhos ou mãos elevadas no step.',
     cue:'"Spingi il suolo lontano da te"',
     vid:MW+'male-Bodyweight-push-up-front.mp4', yt:null },
   'pushup-wide': { name:'Wide Push-up', tag:'Spinta orizz.', family:'pushup', scaling:2,
     note:'Mani più larghe delle spalle (circa 1.5×). Maggiore attivazione del pettorale. Gomiti restano a 45° dal busto.',
+    notePT:'Mãos mais largas que os ombros (cerca de 1.5×). Maior ativação do peitoral. Cotovelos mantêm-se a 45° do tronco.',
     cue:'"Schiaccia il pavimento verso i lati"',
     vid:MW+'male-Bodyweight-push-up-front.mp4', yt:null },
   'pushup-diamond': { name:'Diamond Push-up', tag:'Spinta orizz.', family:'pushup', scaling:3,
     note:'Mani ravvicinate sotto il petto a formare un rombo. Focus tricipiti. Avanzato — variante base: mani distanziate 10 cm.',
+    notePT:'Mãos juntas sob o peito formando um losango. Foco nos tríceps. Avançado — variante base: mãos a 10 cm.',
     cue:'"Gomiti vicini al busto, spingi diritto"',
     vid:MW+'male-Bodyweight-diamond-push-ups-front.mp4', yt:null },
   'pushup-decline': { name:'Decline Push-up su step', tag:'Spinta orizz.', family:'pushup', scaling:2,
     note:'Piedi sullo step, mani a terra. Maggiore attivazione della porzione clavicolare del pettorale. Corpo rigido.',
+    notePT:'Pés no step, mãos no chão. Maior ativação da porção clavicular do peitoral. Corpo rígido.',
     cue:'"Porta il petto verso il basso, non le spalle"',
     vid:MW+'male-Bodyweight-decline-push-up-front.mp4', yt:null },
   'pike-pushup': { name:'Pike Push-up', tag:'Spinta vert.', family:'pike', scaling:2,
     note:'Posizione a V invertita (fianchi alti), scendi con la testa verso il suolo tra le mani. Allena spalle e tricipiti.',
+    notePT:'Posição em V invertido (ancas altas), desce com a cabeça em direção ao chão entre as mãos. Treina ombros e tríceps.',
     cue:'"Porta la testa tra le mani, non davanti"',
     vid:null, yt:'jz_Vr4JbUjc' },
   'pike-pushup-step': { name:'Pike Push-up su step', tag:'Spinta vert.', family:'pike', scaling:3,
     note:'Piedi sullo step, posizione a V più accentuata. Maggiore ROM e carico rispetto al pike a terra.',
+    notePT:'Pés no step, posição em V mais acentuada. Maior ROM e carga que o pike no chão.',
     cue:'"Fianchi verso il soffitto, testa in basso"',
     vid:null, yt:'jz_Vr4JbUjc' },
   'pushup-decline-steep': { name:'Decline Push-up ripido', tag:'Spinta vert.', family:'pike', scaling:2,
     note:'Piedi su panca alta, angolo molto inclinato. Più verticale del decline standard — attiva principalmente le spalle.',
+    notePT:'Pés na mesa alta, ângulo muito inclinado. Mais vertical que o decline padrão — ativa principalmente os ombros.',
     cue:'"Pensa alla pressione verso il soffitto"',
     vid:MW+'male-Bodyweight-decline-push-up-front.mp4', yt:null },
 
   /* HINGE */
   'hip-thrust-cl': { name:'Hip Thrust su step', tag:'Hinge', family:'hip-thrust', scaling:1,
     note:'Spalle sullo step, piedi a terra. Spinta esplosiva dei glutei verso l\'alto. Pausa contratta 1" in cima. Corpo libero.',
+    notePT:'Ombros no step, pés no chão. Impulso explosivo dos glúteos para cima. Pausa contraída 1" no topo. Peso corporal.',
     cue:'"Spingi il soffitto con i fianchi"',
     vid:MW+'male-Barbell-barbell-hip-thrust-front.mp4', yt:null },
   'hip-thrust-disco': { name:'Hip Thrust step + disco', tag:'Hinge', family:'hip-thrust', scaling:2,
     note:'Come Hip Thrust su step ma con disco di ghisa sul bacino. Tenere il disco con entrambe le mani.',
+    notePT:'Como Hip Thrust no step mas com disco de ferro na bacia. Segurar o disco com ambas as mãos.',
     cue:'"Spingi il soffitto con i fianchi, non con la schiena"',
     vid:MW+'male-Barbell-barbell-hip-thrust-front.mp4', yt:null },
   'glute-bridge': { name:'Glute Bridge', tag:'Hinge', family:'hip-thrust', scaling:1,
     note:'A terra, piedi vicino ai glutei. Spinta verso l\'alto con i glutei. Pausa 2" in cima. Variante: disco sul bacino.',
+    notePT:'Deitado no chão, pés perto dos glúteos. Impulso para cima com os glúteos. Pausa 2" no topo. Variante: disco na bacia.',
     cue:'"Schiaccia i glutei in cima, non alzare la schiena"',
     vid:MW+'male-Bodyweight-glute-bridge-front.mp4', yt:null },
   'single-leg-hip-thrust': { name:'Single Leg Hip Thrust', tag:'Hinge', family:'hip-thrust', scaling:2,
     note:'Hip Thrust su step con una sola gamba. Gambe alternate. Corregge squilibri laterali — importante per la potenza del gancio.',
+    notePT:'Hip Thrust no step com uma perna só. Pernas alternadas. Corrige desequilíbrios laterais — importante para a potência do gancho.',
     cue:'"Tieni il bacino parallelo al suolo"',
     vid:MW+'male-Bodyweight-single-leg-glute-bridge-front.mp4', yt:null },
 
   /* SQUAT */
   'goblet-squat': { name:'Goblet Squat (disco)', tag:'Squat', family:'squat', scaling:1,
     note:'Disco tenuto al petto. Talloni a terra, profondità massima. Il gomito interno tocca il ginocchio in fondo.',
+    notePT:'Disco ao peito. Calcanhares no chão, profundidade máxima. O cotovelo interior toca o joelho no fundo.',
     cue:'"Siediti tra i talloni"',
     vid:MW+'male-dumbbell-goblet-squat-front.mp4', yt:null },
   'bulgarian': { name:'Bulgarian Split Squat', tag:'Squat', family:'lunge', scaling:2,
     note:'Piede posteriore sullo step, piede anteriore avanti. Scendi lentamente fino a sfiorare il suolo col ginocchio. Corpo libero o con disco.',
+    notePT:'Pé posterior no step, pé anterior à frente. Desce lentamente até o joelho quase tocar o chão. Peso corporal ou com disco.',
     cue:'"Scendi dritto, non in avanti"',
     vid:MW+'male-Bodyweight-bulgarian-split-squat-front.mp4', yt:null },
   'reverse-lunge': { name:'Reverse Lunge', tag:'Squat', family:'lunge', scaling:1,
     note:'Passo indietro, ginocchio posteriore sfiora il suolo. Ginocchio anteriore rimane sopra il piede. Ritorno esplosivo.',
+    notePT:'Passo para trás, joelho posterior rasa o chão. Joelho anterior mantém-se acima do pé. Retorno explosivo.',
     cue:'"Scendi con controllo, sali con potenza"',
     vid:MW+'male-Bodyweight-bodyweight-reverse-lunge-front.mp4', yt:null },
   'step-up': { name:'Step-up esplosivo', tag:'Squat', family:'lunge', scaling:1,
     note:'Salita esplosiva sullo step con una gamba, spinta dal tallone. Porta il ginocchio opposto in alto. Discesa controllata. Alternare le gambe.',
+    notePT:'Subida explosiva no step com uma perna, impulso pelo calcanhar. Leva o joelho oposto para cima. Descida controlada. Alternar as pernas.',
     cue:'"Spingi dal tallone, porta il ginocchio su"',
     vid:MW+'male-Dumbbells-dumbbell-step-up-front.mp4', yt:null },
   'sumo-squat': { name:'Sumo Squat (disco)', tag:'Squat', family:'squat', scaling:1,
     note:'Piedi larghi (1.5× spalle), punte a 45°. Disco verticale tra le gambe. Ginocchia seguono la direzione delle punte.',
+    notePT:'Pés largos (1.5× ombros), pontas a 45°. Disco vertical entre as pernas. Joelhos seguem a direção das pontas.',
     cue:'"Apri le ginocchia verso l\'esterno"',
     vid:MW+'male-dumbbell-sumo-squat-front.mp4', yt:null },
 
   /* TIRATA */
   'prone-row': { name:'Prone Row (disco)', tag:'Tirata', family:'row-prone', scaling:1,
     note:'Posizione prona (faccia a terra), disco in una mano. Tira verso il fianco portando il gomito verso il soffitto. Pausa 1" in cima. Alternare i lati. Attiva romboidi e gran dorsale.',
+    notePT:'Posição prona (face para baixo), disco numa mão. Puxa para o lado levando o cotovelo para o teto. Pausa 1" no topo. Alterna os lados. Ativa romboides e grande dorsal.',
     cue:'"Gomito verso il soffitto, non di lato"',
     vid:null, yt:'F6P8QaNXgt0' },
 
   /* CORE */
   'dead-bug': { name:'Dead Bug', tag:'Core', family:'core-floor', scaling:1,
     note:'Schiena incollata al suolo in ogni momento. Espira quando estendi braccio+gamba opposti. Mai alzare il lombare.',
+    notePT:'Costas coladas ao chão em cada momento. Expira quando estende braço+perna opostos. Nunca levanta o lombar.',
     cue:'"Schiaccia la schiena come carta"',
     vid:MW+'male-Bodyweight-dead-bug-front.mp4', yt:null },
   'plank-tap': { name:'Plank Shoulder Tap', tag:'Core', family:'core-plank', scaling:1,
     note:'Plank alto, mani sotto le spalle. Tocca la spalla opposta senza ruotare i fianchi. Piedi più larghi per stabilità.',
+    notePT:'Prancha alta, mãos sob os ombros. Toca o ombro oposto sem rodar as ancas. Pés mais afastados para estabilidade.',
     cue:'"Fianchi fissi, zero rotazione"',
     vid:null, yt:'gKA5LBy7WAI' },
   'hollow-body': { name:'Hollow Body Hold', tag:'Core', family:'core-floor', scaling:2,
     note:'Schiena schiacciata a terra, gambe e braccia estese a pochi cm dal suolo. Costole chiuse. Variante base: gambe piegate a 90°.',
+    notePT:'Costas pressionadas ao chão, pernas e braços estendidos a poucos cm do chão. Costelas fechadas. Variante base: pernas dobradas a 90°.',
     cue:'"Costole giù, lombare incollato"',
     vid:MW+'male-Bodyweight-hollow-hold-front.mp4', yt:null },
   'side-plank': { name:'Side Plank', tag:'Core', family:'core-plank', scaling:1,
     note:'Avambraccio a terra, corpo in linea retta. Fianchi in alto. 30–45" per lato. Variante avanzata: braccio esteso.',
+    notePT:'Antebraço no chão, corpo em linha reta. Ancas no alto. 30–45" por lado. Variante avançada: braço estendido.',
     cue:'"Spingi il suolo con l\'avambraccio"',
     vid:null, yt:'iNbH7_edNI8' },
   'bird-dog': { name:'Bird Dog', tag:'Core', family:'core-floor', scaling:1,
     note:'In quadrupedia, estendi braccio destro + gamba sinistra in simultanea. Pausa 2" in estensione. Schiena piatta. Alternare.',
+    notePT:'Em quadrupedia, estende braço direito + perna esquerda em simultâneo. Pausa 2" na extensão. Costas planas. Alternar.',
     cue:'"Schiena piatta, nessuna rotazione del bacino"',
     vid:MW+'male-Bodyweight-bird-dog-front.mp4', yt:null },
 
   /* TIRATA AGGIUNTIVE */
   'inverted-row': { name:'Inverted Row', tag:'Tirata', family:'row-hang', scaling:1,
     note:'Sotto una barra bassa (o bordo tavolo) in posizione inclinata. Tira il petto verso la barra mantenendo il corpo rigido. Più orizzontale = più difficile.',
+    notePT:'Sob uma barra baixa (ou borda de mesa) em posição inclinada. Puxa o peito para a barra mantendo o corpo rígido. Mais horizontal = mais difícil.',
     cue:'"Porta il petto alla barra, non il mento"',
     vid:null, yt:'vZy_Eu_Z0WA' },
   'renegade-row': { name:'Renegade Row (KB)', tag:'Tirata', family:'row-plank', scaling:3,
     note:'Plank su due KB. Tira un KB verso il fianco alternando i lati. Zero rotazione del bacino. Piedi larghi per stabilità.',
+    notePT:'Prancha sobre dois KB. Puxa um KB para o lado alternando. Zero rotação da bacia. Pés mais afastados para estabilidade.',
     cue:'"Fianchi fissi come una tavola, gomito al cielo"',
     vid:null, yt:'KG_JGuhjBeY' },
   'band-row': { name:'Band Row (elastico)', tag:'Tirata', family:'row-standing', scaling:1,
     note:'Elastico fissato a altezza petto. Tira verso i fianchi con gomiti a 45°. Pausa 1" in contrazione. Attiva gran dorsale e romboidi.',
+    notePT:'Elástico fixo à altura do peito. Puxa para os lados com cotovelos a 45°. Pausa 1" na contração. Ativa grande dorsal e romboides.',
     cue:'"Schiaccia le scapole insieme in cima"',
     vid:null, yt:'LSkyinhmA8k' },
 
   /* ESPLOSIVITÀ AGGIUNTIVE */
   'lateral-bound': { name:'Lateral Bound', tag:'Esplosività', family:'jump', scaling:2,
     note:'Salto laterale su una gamba sola, atterraggio monopodalico stabile. Esplodi di lato il più lontano possibile, poi torna. Allena la potenza laterale del passo del boxer.',
+    notePT:'Salto lateral numa perna só, aterragem monopodalica estável. Explode de lado o mais longe possível, depois volta. Treina a potência lateral do passo do boxeur.',
     cue:'"Atterra come una statua — zero oscillazione"',
     vid:null, yt:'ZkYORFHgRTw' },
 
   /* CORE AGGIUNTIVE */
   'mountain-climber': { name:'Mountain Climber', tag:'Core', family:'core-plank', scaling:1,
     note:'Plank alto, porta il ginocchio verso il petto alternando a ritmo sostenuto. Core sempre attivo, fianchi stabili. Variante lenta per qualità, veloce per cardio.',
+    notePT:'Prancha alta, leva o joelho ao peito alternando a ritmo sustentado. Core sempre ativo, ancas estáveis. Variante lenta para qualidade, rápida para cardio.',
     cue:'"Fianchi giù, non saltare con le spalle"',
     vid:null, yt:'nmwgirgXLYM' },
   'v-up': { name:'V-Up', tag:'Core', family:'core-floor', scaling:2,
     note:'Da sdraiato, solleva gambe e busto contemporaneamente verso il centro. Tocca i piedi con le mani in cima. Abbassa lentamente. Variante base: gambe piegate.',
+    notePT:'De deitado, levanta pernas e tronco simultaneamente para o centro. Toca os pés com as mãos no topo. Desce lentamente. Variante base: pernas dobradas.',
     cue:'"Sali con gambe e busto insieme — non in sequenza"',
     vid:null, yt:'iP2fjvG0g3w' },
   /* HINGE AGGIUNTIVE */
   'kb-swing': { name:'KB Swing', tag:'Hinge', family:'hinge-ballistic', scaling:2,
     note:'Schiena piatta, spinta con i fianchi — non squat. Il KB sale con la spinta delle anche, non con le braccia. Ferma il movimento in alto con i gluti contratti.',
+    notePT:'Costas planas, impulso com as ancas — não é um agachamento. O KB sobe com o impulso das ancas, não com os braços. Para o movimento no topo com os glúteos contraídos.',
     cue:'"Fianchi avanti come uno schiocco"',
     vid:null, yt:'bDCeXbMJVNs' },
 
   'rdl-kb': { name:'Romanian DL (KB)', tag:'Hinge', family:'hinge-rdl', scaling:2,
     note:'Schiena piatta, KB scivolano lungo le cosce. Fermati quando senti lo stiramento dei femorali — non scendere oltre. Spingi i fianchi avanti per risalire.',
+    notePT:'Costas planas, KB deslizam pelas coxas. Para quando sentires o alongamento dos isquiotibiais — não desças mais. Empurra as ancas para a frente para subir.',
     cue:'"Spingi i fianchi indietro, non piegare le ginocchia"',
     vid:null, yt:'JCXUYuzwNrM' },
 
   'single-leg-rdl': { name:'Single Leg RDL (BW)', tag:'Hinge', family:'hinge-rdl', scaling:2,
     note:'Gamba libera tesa dietro, busto parallelo al suolo. Mantieni il bacino quadrato — non ruotare i fianchi. Una mano può toccare il muro per l\'equilibrio se necessario.',
+    notePT:'Perna livre estendida para trás, tronco paralelo ao chão. Mantém a bacia quadrada — sem rodar as ancas. Uma mão pode tocar a parede para equilíbrio se necessário.',
     cue:'"Corpo rigido come un\'asse che ruota sul piede"',
     vid:null, yt:'DPFnfAUCvTA' },
 
   /* TIRATA AGGIUNTIVE con KB */
   'kb-row': { name:'KB Single Arm Row', tag:'Tirata', family:'row-kb', scaling:2,
     note:'Mano e ginocchio opposti sul panco. KB tirati verso il fianco — gomito sfiora le costole. Pausa 1" in cima. Niente rotazione del busto.',
+    notePT:'Mão e joelho opostos na banca. KB puxado para o lado — cotovelo rasa as costelas. Pausa 1" no topo. Sem rotação do tronco.',
     cue:'"Gomito al soffitto, non alla schiena"',
     vid:null, yt:'pYcpY20QaE8' },
 
   /* SPINTA AGGIUNTIVE */
   'kb-floor-press': { name:'KB Floor Press', tag:'Spinta orizz.', family:'pushup', scaling:2,
     note:'Disteso a terra, KB in entrambe le mani. Gomiti a 45° dal busto. Spingi verso l\'alto fermandoti prima del blocco del gomito. Contrazione del pettorale in cima.',
+    notePT:'Deitado no chão, KB em ambas as mãos. Cotovelos a 45° do tronco. Empurra para cima parando antes do bloqueio do cotovelo. Contração do peitoral no topo.',
     cue:'"Schiaccia i KB uno verso l\'altro mentre spingi"',
     vid:null, yt:'yXstm050X84' },
 
   'archer-pushup': { name:'Archer Push-up', tag:'Spinta orizz.', family:'pushup', scaling:3,
     note:'Mani larghissime. Scendi verso una mano sola tenendo l\'altro braccio teso — simile a una panca manubri unilaterale. Alternare i lati.',
+    notePT:'Mãos muito largas. Desce para uma mão só mantendo o outro braço estendido — semelhante a um press unilateral. Alternar os lados.',
     cue:'"Petto verso la mano piegata, braccio teso come una freccia"',
     vid:null, yt:'OVRBYrjszy4' },
 
   /* ESPLOSIVITÀ con MB */
   'mb-rotational-slam': { name:'MB Rotational Slam', tag:'Esplosività', family:'slam', scaling:2,
     note:'MB sopra la testa, rotazione del busto, slam laterale al suolo. Alterna i lati. Replica la catena cinetica del cross — anca → spalla → braccio. Esplodente.',
+    notePT:'MB acima da cabeça, rotação do tronco, slam lateral ao chão. Alterna os lados. Replica a cadeia cinética do cross — anca > ombro > braço. Explosivo.',
     cue:'"Tutto il corpo nel colpo — non solo le braccia"',
     vid:null, yt:'k67D95cDohc' },
 
   'split-squat-jump': { name:'Split Squat Jump', tag:'Esplosività', family:'jump', scaling:3,
     note:'Partenza in split stance (affondo). Salto esplosivo e scambio delle gambe in aria. Atterraggio morbido, diretto nella posizione di partenza opposta. Aumenta la potenza del push-off.',
+    notePT:'Partida em split stance (afundo). Salto explosivo e troca de pernas no ar. Aterragem suave, diretamente na posição de partida oposta. Aumenta a potência do push-off.',
     cue:'"Salta in alto, non in avanti — atterraggio silenzioso"',
     vid:null, yt:'NVWElWKCsyQ' },
 
   /* CORE AGGIUNTIVE */
   'russian-twist': { name:'Russian Twist (MB)', tag:'Core', family:'core-rotation', scaling:2,
     note:'Seduto a terra, busto a 45°, MB tra le mani. Ruota il busto da lato a lato toccando il MB a terra. Gambe sollevate per aumentare difficoltà. Allena la rotazione del tronco fondamentale nel cross.',
+    notePT:'Sentado no chão, tronco a 45°, MB entre as mãos. Roda o tronco de lado a lado tocando o MB no chão. Pernas levantadas para aumentar a dificuldade. Treina a rotação do tronco, fundamental no cross.',
     cue:'"Le spalle ruotano — le anche restano ferme"',
     vid:null, yt:'wkD8rjkodUI' },
 
   'leg-raise': { name:'Leg Raise', tag:'Core', family:'core-floor', scaling:2,
     note:'Disteso a terra, mani sotto il bacino. Gambe tese, sali a 90° e scendi lentamente senza toccare il suolo. Schiena incollata a terra per tutto il movimento.',
+    notePT:'Deitado no chão, mãos sob a bacia. Pernas estendidas, sobe a 90° e desce lentamente sem tocar o chão. Costas coladas ao chão durante todo o movimento.',
     cue:'"Schiena piatta — se si stacca, piega le ginocchia"',
     vid:null, yt:'l4kQd9eWclE' },
 
   /* SQUAT AGGIUNTIVE */
   'lateral-squat': { name:'Lateral Squat', tag:'Squat', family:'squat', scaling:2,
     note:'Gambe larghe. Scendi lateralmente su un lato piegando un ginocchio, l\'altra gamba resta tesa. Schiena dritta, piede piatto. Allena l\'abduttore e il quadricipite in pattern laterale — utile per il footwork.',
+    notePT:'Pernas largas. Desce lateralmente para um lado dobrando um joelho, a outra perna fica estendida. Costas direitas, pé plano. Treina abdutor e quadríceps em padrão lateral — útil para o footwork.',
     cue:'"Piede piatto, ginocchio segue la punta del piede"',
     vid:null, yt:'vpIRmpw5Jcg' },
 
   'kb-goblet-squat-pause': { name:'Goblet Squat con pausa (KB)', tag:'Squat', family:'squat', scaling:2,
     note:'KB al petto, squat profondo con 2 secondi di pausa in fondo. Gomiti verso l\'interno delle ginocchia. La pausa elimina l\'inerzia e aumenta il carico muscolare reale.',
+    notePT:'KB ao peito, agachamento profundo com 2 segundos de pausa no fundo. Cotovelos para dentro dos joelhos. A pausa elimina a inércia e aumenta a carga muscular real.',
     cue:'"Siediti nel mezzo dei piedi — talloni sempre a terra"',
     vid:null, yt:'MeIiIdhvXT4' },
 };
@@ -4283,6 +4330,7 @@ const NEURO_PARADIGMS = [
     { g:'G4', label:'Switch rapido', round:'Round 4', accent:'#C41230',
       desc:'Due esercizi simili (stessa posizione). Il coach usa due segnali diversi — uno per esercizio. L\'atleta deve leggere il segnale e switchare in meno di 1 secondo. Pausa tra segnali: 0.5–3 sec casuale.',
       cue:'"Guarda il segnale. Nessuna preparazione — parti."',
+      cuePT:'"Lê o sinal. Sem preparação — parte."',
       example:'Es: mano destra = esercizio 1, mano sinistra = esercizio 2. Coach alterna casualmente. Progressione: aggiunge segnali falsi (pugno chiuso = stop).' },
   ],
   // SETTIMANA 2 — DIREZIONE (il segnale dice dove, non quando)
@@ -4302,6 +4350,7 @@ const NEURO_PARADIGMS = [
     { g:'G4', label:'Direzione + dual task', round:'Round 4', accent:'#C41230',
       desc:'Stesso schema direzionale del G3, ma il coach aggiunge un compito cognitivo parallelo: conta a ritroso da 20, nomina un oggetto per colore indicato. Il cervello deve gestire il movimento E il task simultaneamente — massima interferenza cognitiva.',
       cue:'"Muoviti E rispondi. L\'errore è fermarsi per pensare."',
+      cuePT:'"Move-te E responde. O erro é parar para pensar."',
       example:'Coach indica direzione + chiede "dimmi un animale che inizia per S". L\'atleta risponde mentre esegue. Progressione: compito più difficile (numero primo sotto 50, sottrazione a 2 cifre).' },
   ],
   // SETTIMANA 3 — INIBIZIONE (stop-go con segnali falsi)
@@ -4321,6 +4370,7 @@ const NEURO_PARADIGMS = [
     { g:'G4', label:'Segnali falsi', round:'Round 4', accent:'#C41230',
       desc:'Il coach lancia segnali falsi mescolati a quelli veri. L\'atleta deve ignorare i falsi e reagire solo ai veri — massima inibizione selettiva. Replica la capacità di non cadere nelle feinte dell\'avversario.',
       cue:'"Non ogni segnale è vero. Leggi il contesto, non solo il gesto."',
+      cuePT:'"Nem todo o sinal é verdadeiro. Lê o contexto, não só o gesto."',
       example:'STOP reale = voce del coach. STOP falso = gesto della mano senza voce. L\'atleta reagisce solo alla voce. Progressione: coach usa due voci diverse (alta/bassa = vai/stop).' },
   ],
   // SETTIMANA 4 — DECISIONE COMPLETA (timing + cosa + dove)
@@ -4340,6 +4390,7 @@ const NEURO_PARADIGMS = [
     { g:'G4', label:'Caos integrato', round:'Round 4', accent:'#C41230',
       desc:'Integrazione totale: il coach può usare qualsiasi combinazione di segnali dalla settimana 1-3. Timing imprevedibile, direzione casuale, possibili segnali falsi, con task cognitivo parallelo. È il round più vicino a ciò che succede sul ring.',
       cue:'"Nessuna preparazione. Leggi, decidi, fai. In questo ordine. Senza pause."',
+      cuePT:'"Sem preparação. Lê, decide, faz. Nesta ordem. Sem pausas."',
       example:'Coach mescola: fischio direzionale + stop falsi + domanda cognitiva. L\'atleta non sa mai cosa arriva. Nessuna sequenza ripetuta due volte.' },
   ],
 ];
@@ -5838,7 +5889,7 @@ function generateCircuitPDF(dayKey, shareMode) {
     if (paradigm[3] && paradigm[3].cue) {
       chk(10);
       doc.setFontSize(8); doc.setFont('helvetica', 'italic'); doc.setTextColor(RED[0], RED[1], RED[2]);
-      var cueLines = doc.splitTextToSize('G4: ' + ptText(paradigm[3].cue), cw - 4);
+      var cueLines = doc.splitTextToSize('G4: ' + (paradigm[3].cuePT || paradigm[3].cue), cw - 4);
       cueLines.forEach(function(l){ chk(5); doc.text(l, margin+2, y); y+=4.5; });
       doc.setTextColor(0,0,0); doc.setFont('helvetica', 'normal');
     }
@@ -5872,7 +5923,7 @@ function generateCircuitPDF(dayKey, shareMode) {
 
     // Name
     doc.setFontSize(9.5); doc.setFont('helvetica', 'bold'); doc.setTextColor(20,20,20);
-    var nameLines = doc.splitTextToSize(ptText(ex.name), cw * 0.65);
+    var nameLines = doc.splitTextToSize(ex.name, cw * 0.65);
     nameLines.forEach(function(l, li) {
       doc.text(l, margin + 11, y + li * lh);
     });
@@ -5884,7 +5935,7 @@ function generateCircuitPDF(dayKey, shareMode) {
     // Note
     if (ex.note) {
       doc.setFontSize(8); doc.setFont('helvetica', 'normal'); doc.setTextColor(80,80,80);
-      var noteLines = doc.splitTextToSize(ptText(ex.note), cw - 6);
+      var noteLines = doc.splitTextToSize(ex.notePT || ptText(ex.note), cw - 6);
       noteLines.forEach(function(l){ chk(5); doc.text(l, margin+4, y); y+=4.5; });
     }
     y += 4;
