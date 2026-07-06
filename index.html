@@ -5336,7 +5336,9 @@ function switchAgiWeek(w) {
 
 function renderAgiWeekBar(activeW) {
   var h = "<div class=\"agi-week-bar\">";
+  var isScarico = activeW === 'scarico';
   var isOff = activeW === 'offseason';
+  h += "<button class=\"agi-wk-btn" + (isScarico?" active":"") + "\" data-w=\"scarico\" onclick=\"switchAgiWeek('scarico')\" style=\"font-size:10px;min-width:62px;background:" + (isScarico?"var(--acc)":"rgba(255,107,53,.15)") + ";border-color:" + (isScarico?"var(--acc)":"rgba(255,107,53,.4)") + ";color:" + (isScarico?"#fff":"#FF6B35") + "\">⚡ Scarico</button>";
   h += "<button class=\"agi-wk-btn" + (isOff?" active":"") + "\" data-w=\"offseason\" onclick=\"switchAgiWeek('offseason')\" style=\"font-size:10px;min-width:56px\">Off-season</button>";
   for (var w=1; w<=12; w++) {
     var isActive = w === activeW;
@@ -5402,14 +5404,17 @@ function resolveWeightsUI(setsStr, oneRM) {
 
 function buildAgiContent(dayKey) {
   var sess;
-  if (currentWeekAgi === 'offseason') {
+  if (currentWeekAgi === 'scarico') {
+    sess = SCARICO_PRE_GARA[dayKey] || null;
+    if (!sess) return "<div style=\"padding:20px;color:#888;text-align:center\">⚡ Scarico pre-gara<br><br><span style='font-size:14px'>Sessione non prevista per questo giorno.<br>Usa LUN e MER per il lavoro di scarico.<br>GIO e VEN: <b>riposo completo</b>.</span></div>";
+  } else if (currentWeekAgi === 'offseason') {
     sess = getOffseasonSession(dayKey);
   } else {
     sess = AGONISTA[dayKey] ? AGONISTA[dayKey][currentWeekAgi] : null;
   }
   if (!sess) return "<div style=\"padding:20px;color:#666;\">Sessione non trovata</div>";
 
-  var phaseColor = {1:"#1e3a5a",2:"#1e4a1e",3:"#5a1e1e",4:"#4a4a4a"}[sess.fase];
+  var phaseColor = {0:"#3a2a0a",1:"#1e3a5a",2:"#1e4a1e",3:"#5a1e1e",4:"#4a4a4a"}[sess.fase] || "#2a2a2a";
   var h = "";
 
   var agiDateStr = getSessionDate(dayKey, currentWeekAgi);
@@ -6275,6 +6280,86 @@ function getOffseasonSession(dayKey) {
   if (sess) sess._rotation = rot;
   return sess;
 }
+
+/* ══════════════════════════════════════════
+   SCARICO PRE-GARA — LUN + MER
+   Settimana di scarico pre-torneo
+   ══════════════════════════════════════════ */
+var SCARICO_PRE_GARA = {
+  lun: {
+    fase: 0, fase_label: '⚡ SCARICO PRE-GARA', fase_note: 'Intensità moderata · Nessun esaurimento',
+    subtitle: 'Balistico + Cardio + Tecnica boxe',
+    blocks: [
+      { type: 'WU', label: 'Riscaldamento — Corda', duration: '12 min',
+        exercises: [
+          { name: 'Corda — ritmo lento', sets: '1 round 3\'', rec: '—', note: 'Piedi leggeri, respirazione nasale', rpe: '', alt: '' },
+          { name: 'Corda — ritmo medio', sets: '1 round 3\'', rec: '—', note: 'Aumenta il passo gradualmente', rpe: '', alt: '' },
+          { name: 'Corda — variazioni', sets: '1 round 3\'', rec: '—', note: 'Incroci, doppi, cambio ritmo', rpe: '', alt: '' }
+        ]
+      },
+      { type: 'ME', label: 'Circuito Balistico', duration: '15 min',
+        note_fase: '4 esercizi × 4 serie × 4 rep — recupero 90" pieno tra serie. Qualità assoluta, stop se senti affaticamento.',
+        exercises: [
+          { name: 'Jump Squat', sets: '4×4', rec: '90"', note: 'Carica lenta, esplosione massima, atterraggio morbido', rpe: 'RPE 7', alt: '' },
+          { name: 'Med Ball Slam', sets: '4×4', rec: '90"', note: 'Piena estensione verso l\'alto, slam con tutto il corpo', rpe: 'RPE 7', alt: '' },
+          { name: 'Plyo Push-up', sets: '4×4', rec: '90"', note: 'Discesa controllata, spinta esplosiva, mani che staccano', rpe: 'RPE 7', alt: '' },
+          { name: 'Med Ball Rotational Throw', sets: '4×4/lato', rec: '90"', note: 'Simula il cross — catena rotatoria esplosiva', rpe: 'RPE 7', alt: '' }
+        ]
+      },
+      { type: 'DE', label: 'Cardio — Bici Spinning o Vogatore', duration: '15 min',
+        note_fase: 'Intervalli morbidi: 2\' a ritmo medio (70-75% FC max) → 1\' leggero. Ripeti 5 volte. Obiettivo: sudare senza sovraccaricare le gambe.',
+        exercises: [
+          { name: 'Bici Spinning o Vogatore', sets: '5 × (2\' medio + 1\' leggero)', rec: '—', note: 'FC target 70-75% del massimo. Non oltre.', rpe: 'RPE 6-7', alt: '' }
+        ]
+      },
+      { type: 'SP', label: 'Tecnica Boxe', duration: '30 min',
+        exercises: [
+          { name: 'Ombra', sets: '3 round × 3\'', rec: '1\'', note: 'Movimento reale, combinazioni fluide al 70%. Lavora la testa.', rpe: 'RPE 6', alt: '' },
+          { name: 'Sacco — tecnica', sets: '2 round × 3\'', rec: '1\'', note: 'Combinazioni pulite al 70%, precisione sul bersaglio', rpe: 'RPE 6', alt: '' },
+          { name: 'Sacco — finali intensi', sets: '2 round × 3\'', rec: '1\'', note: 'Ultimi 20" di ogni round: intensità vera, poi scarica', rpe: 'RPE 8 (solo gli ultimi 20")', alt: '' }
+        ]
+      },
+      { type: 'CD', label: 'Defaticamento', duration: '10 min',
+        exercises: [
+          { name: 'Camminata + respirazione diaframmatica', sets: '5\'', rec: '—', note: 'Inspira 4", trattieni 4", espira 6"', rpe: '', alt: '' },
+          { name: 'Stretching gambe e spalle', sets: '5\'', rec: '—', note: 'Quadricipiti, flessori anca, deltoidi, petto', rpe: '', alt: '' }
+        ]
+      }
+    ]
+  },
+  mer: {
+    fase: 0, fase_label: '⚡ SCARICO PRE-GARA', fase_note: 'Leggero · Solo sharpness',
+    subtitle: 'Attivazione neurale + Cardio steady + Tecnica',
+    blocks: [
+      { type: 'WU', label: 'Riscaldamento', duration: '10 min',
+        exercises: [
+          { name: 'Mobilità articolare', sets: '5\'', rec: '—', note: 'Collo, spalle, fianchi, caviglie — rotazioni lente', rpe: '', alt: '' },
+          { name: 'Corda leggera', sets: '2 round × 2\'', rec: '30"', note: 'Piedi morbidi, ritmo basso, solo per scaldarsi', rpe: '', alt: '' }
+        ]
+      },
+      { type: 'DE', label: 'Cardio Steady — Vogatore o Bici', duration: '12 min',
+        note_fase: 'Ritmo costante al 65% FC max — non intervalli. Aiuta a smaltire gli ultimi grammi senza stancare.',
+        exercises: [
+          { name: 'Vogatore o Bici Spinning', sets: '12\' continui', rec: '—', note: 'Ritmo costante, respirazione controllata. Se sudi un po\', ottimo.', rpe: 'RPE 5-6', alt: '' }
+        ]
+      },
+      { type: 'SP', label: 'Tecnica Boxe — Sharpness', duration: '25 min',
+        note_fase: 'Nessuna stanchezza muscolare. Obiettivo: sentirsi veloci e precisi.',
+        exercises: [
+          { name: 'Ombra', sets: '2 round × 3\'', rec: '1\'', note: 'Movimenti fluidi e veloci. Un round con occhi chiusi per sentire il ritmo interno.', rpe: 'RPE 5', alt: '' },
+          { name: 'Sacco — combinazioni', sets: '3 round × 3\'', rec: '1\'', note: 'Tecnica pulita, ultimi 30" con picco di intensità, poi scarica immediata', rpe: 'RPE 6 (picco RPE 8 × 30")', alt: '' },
+          { name: 'Corda — ritmo medio', sets: '2 round × 2\'', rec: '30"', note: 'Piedi veloci, nessuno sprint, mantieni leggerezza', rpe: 'RPE 5', alt: '' }
+        ]
+      },
+      { type: 'CD', label: 'Defaticamento', duration: '10 min',
+        exercises: [
+          { name: 'Stretching lungo', sets: '7\'', rec: '—', note: 'Ischiocrurali, flessori anca, petto, spalle. Nessuna fretta.', rpe: '', alt: '' },
+          { name: 'Respirazione diaframmatica', sets: '3\'', rec: '—', note: 'Sistema nervoso parasimpatico: inspira 4", espira 6"', rpe: '', alt: '' }
+        ]
+      }
+    ]
+  }
+};
 
 /* ── Rotazione A ── */
 var OFFSEASON_A = {
