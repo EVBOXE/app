@@ -248,6 +248,20 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,'SF Pro Ro
 .tb-x{font-size:14px;color:#555;font-weight:700}
 .tb-unit-lbl{font-size:12px;color:#666}
 .tb-1rm-badge{min-width:80px;background:#1a0005;border:1.5px solid #3a0010;color:#C41230;border-radius:8px;padding:6px 10px;font-size:12px;font-weight:800;text-align:center;transition:.2s}
+.tb-proto-details{margin-top:8px;border-radius:8px;overflow:hidden}
+.tb-proto-details summary{font-size:12px;color:#666;cursor:pointer;padding:6px 0;list-style:none;user-select:none}
+.tb-proto-details summary::-webkit-details-marker{display:none}
+.tb-proto-details summary::before{content:'▶ ';font-size:10px}
+.tb-proto-details[open] summary::before{content:'▼ '}
+.tb-proto-body{margin-top:8px;background:#0a0a0a;border-radius:8px;padding:12px 14px}
+.tb-proto-steps{margin:0;padding-left:14px}
+.tb-proto-steps li{font-size:13px;color:#aaa;line-height:1.7;margin-bottom:1px}
+.tb-norms-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#555;margin:12px 0 6px}
+.tb-norm-row{display:flex;align-items:flex-start;gap:8px;margin-bottom:6px}
+.tb-norm-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:3px}
+.tb-norm-text{font-size:12px;line-height:1.5;color:#ccc}
+.tb-norm-range{font-weight:700}
+.tb-norm-note{color:#777;font-size:11px}
 .tb-prog-tab{flex:1;padding:10px;border-radius:10px;border:1px solid #222;background:#0d0d0d;color:#666;font-size:13px;font-weight:700;cursor:pointer;text-align:center;transition:.15s}
 .tb-prog-tab.active{background:#FF6B35;border-color:#FF6B35;color:#fff}
 .tb-save-btn{width:100%;padding:14px;background:var(--acc);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:900;cursor:pointer;letter-spacing:.02em}
@@ -7902,17 +7916,214 @@ function renderAthImportPanel() {
    TEST BATTERY — SESSIONE UNIFICATA
    ══════════════════════════════════════════ */
 var TB_FITNESS_TESTS = [
-  { id:'sj',         name:'Squat Jump (SJ)',  unit:'cm', hint:'Agachar 90° e manter imóvel 2s → saltar. Sem contra-movimento. 3 tentativas, registar a melhor.' },
-  { id:'cmj',        name:'CMJ',              unit:'cm', hint:'Contra-movimento contínuo — agachar e saltar sem pausa no ponto baixo. 3 tentativas, melhor.' },
-  { id:'broad_jump', name:'Broad Jump',       unit:'cm', hint:'Salto horizontal de pés juntos. Medir do pé à linha de partida até ao calcanhar. 3 tentativas.' },
-  { id:'sprint10',   name:'Sprint 10m',       unit:'s',  hint:'Partida em reação ao sinal do coach. Correr ALÉM da marca (não travar na linha). 2 × rec. 3 min.' },
-  { id:'sprint30',   name:'Sprint 30m',       unit:'s',  hint:'Aquecimento obrigatório (2 progressivos a 80% e 90%). 2 tentativas, recuperação 4 min.' },
-  { id:'cooper',     name:'Test di Cooper (12 min)', unit:'m',    hint:'Corsa 12 min continua. Misura la distanza totale percorsa. Riscaldamento 5 min prima. GPS o pista 400m.' },
-  { id:'yoyo',       name:'Yo-Yo IR1',               unit:'liv.', hint:'Registra livello.fase raggiunto (es: 16.1 = livello 16 fase 1). Stop al 2° avviso.' },
-  { id:'pushup_max', name:'Push-up Massimali',        unit:'reps', hint:'Piegamenti consecutivi senza pausa. Petto tocca terra, braccia completamente tese in cima. Stop al primo cedimento.' },
-  { id:'pullup_max', name:'Trazioni Massimali',       unit:'reps', hint:'Trazione completa: partenza braccia tese, mento sopra la sbarra. Presa pronata. No slancio.' },
-  { id:'plank_time', name:'Plank Isometrico',         unit:'sec',  hint:'Posizione su avambracci. Bacino neutro, schiena piatta. Conta i secondi fino al cedimento della posizione.' },
-  { id:'sit_reach',  name:'Sit & Reach',              unit:'cm',   hint:'Seduto gambe tese. Fletti il busto in avanti. Cm oltre (+ positivo) o prima (- negativo) della punta dei piedi.' },
+  {
+    id:'sj', name:'Squat Jump (SJ)', unit:'cm',
+    hint:'Agachar 90° mantieni 2s immobile → salto. Senza contro-movimento. 3 tentativi.',
+    proto:[
+      'Mani sui fianchi per tutto il test (no oscillazione braccia)',
+      'Posizione di partenza: piega le ginocchia a ~90° e MANTIENI IMMOBILE per 2 secondi',
+      'Salta verticalmente con massima intenzione esplosiva — senza alcun contro-movimento',
+      'Atterra con entrambi i piedi contemporaneamente, ginocchia leggermente piegate',
+      'Recupero 45" tra le ripetizioni — esegui 3 tentativi, registra il migliore',
+      '📱 Misura con My Jump Lab (app gratuita) oppure metodo parete (segna con gesso)'
+    ],
+    bx:[
+      {c:'#e53935',l:'Insufficiente',r:'< 20 cm',n:'Esplosività critica — il primo passo di attacco è lento e prevedibile'},
+      {c:'#f59e0b',l:'Accettabile',  r:'20 – 28 cm',n:'Minimo funzionale per footwork di base'},
+      {c:'#4caf50',l:'Buono',        r:'28 – 38 cm',n:'Buona esplosività per attacchi e uscite dall\'asse'},
+      {c:'#1565c0',l:'Ottimo per il ring',r:'> 38 cm',n:'Gambe veloci e reattive — esplosione nei colpi balistici'}
+    ]
+  },
+  {
+    id:'cmj', name:'CMJ (Countermovement Jump)', unit:'cm',
+    hint:'Contro-movimento continuo — agacha e salta immediatamente senza pausa. 3 tentativi.',
+    proto:[
+      'Mani sui fianchi (no braccia) — posizione eretta, ginocchia leggermente piegate',
+      'Scendi rapidamente a ~90° e SALTA IMMEDIATAMENTE senza fermarti in basso',
+      'Il movimento discesa-salita è CONTINUO ed esplosivo (sfrutta il riflesso miotático)',
+      'Atterra con entrambi i piedi, ginocchia ammortizzate',
+      'Recupero 45" — 3 tentativi, registra il migliore',
+      '📱 My Jump Lab è il metodo consigliato — AI misura il tempo di volo via camera',
+      '💡 CMJ − SJ = Indice Elastico: se > 5 cm sfrutti bene la reattività neuromuscolare'
+    ],
+    bx:[
+      {c:'#e53935',l:'Insufficiente',r:'< 25 cm',n:'Reattività neuromuscolare bassa — guard alta e movimento lento'},
+      {c:'#f59e0b',l:'Accettabile',  r:'25 – 33 cm',n:'Sufficiente per round brevi ma gambe si appesantiscono'},
+      {c:'#4caf50',l:'Buono',        r:'33 – 42 cm',n:'Buona reattività, footwork dinamico e first-step efficace'},
+      {c:'#1565c0',l:'Ottimo per il ring',r:'> 42 cm',n:'Esplosione di livello agonistico, letale nel gioco di gambe'}
+    ]
+  },
+  {
+    id:'broad_jump', name:'Salto in Lungo da Fermo (Broad Jump)', unit:'cm',
+    hint:'Salto orizzontale da fermo. Metro dalla linea al tallone. 3 tentativi.',
+    proto:[
+      'Piedi alla larghezza delle spalle sulla linea di partenza',
+      'Ginocchia piegate, busto leggermente in avanti — dondola le braccia indietro',
+      'Salta in avanti con massima intenzione — atterra con entrambi i piedi',
+      'Misura dalla linea di partenza al TALLONE PIÙ VICINO alla linea',
+      'Recupero 60" — 3 tentativi, registra il migliore',
+      '🔧 Servono: metro da sarto e nastro adesivo per segnare la linea'
+    ],
+    bx:[
+      {c:'#e53935',l:'Insufficiente',r:'< 170 cm',n:'Step di entrata corto — difficile chiudere la distanza'},
+      {c:'#f59e0b',l:'Accettabile',  r:'170 – 200 cm',n:'Footwork offensivo limitato'},
+      {c:'#4caf50',l:'Buono',        r:'200 – 230 cm',n:'Buona copertura di spazio per entrate e uscite'},
+      {c:'#1565c0',l:'Ottimo per il ring',r:'> 230 cm',n:'Esplosione orizzontale eccellente — letale nel primo passo di attacco'}
+    ]
+  },
+  {
+    id:'sprint10', name:'Sprint 10 metri', unit:'s',
+    hint:'Partenza da fermo al segnale del coach. Corri OLTRE la linea dei 10m. 2 tentativi.',
+    proto:[
+      'Riscaldamento obbligatorio: 5 min trotto + 2 progressivi a 70% e 85%',
+      'Segnare linea di partenza e linea di arrivo a 10m',
+      'Posizione: piede dominante dietro, busto inclinato in avanti, peso in avanti',
+      'Partenza alla risposta al segnale del coach (schiocco di dita o palma)',
+      'Corri in linea retta alla massima velocità — SUPERA la linea dei 10m prima di rallentare',
+      'Cronometro manuale o app slow-motion (200fps). 2 tentativi con 3 min recupero',
+      '⚠️ Nota: per i test di velocità un tempo MINORE è un risultato MIGLIORE'
+    ],
+    bx:[
+      {c:'#e53935',l:'Insufficiente',r:'> 2.10 s',n:'Primo passo lento — difficile entrare e uscire prima dell\'avversario'},
+      {c:'#f59e0b',l:'Accettabile',  r:'1.85 – 2.10 s',n:'Velocità minima funzionale per il ring'},
+      {c:'#4caf50',l:'Buono',        r:'1.65 – 1.85 s',n:'Velocità reattiva, entra e esce con efficacia'},
+      {c:'#1565c0',l:'Ottimo per il ring',r:'< 1.65 s',n:'Accelerazione esplosiva — first-step devastante'}
+    ]
+  },
+  {
+    id:'sprint30', name:'Sprint 30 metri', unit:'s',
+    hint:'Riscaldamento obbligatorio. Corri OLTRE i 30m. 2 tentativi con 4 min recupero.',
+    proto:[
+      'Riscaldamento: 5 min trotto + mobilità dinamica + 2 progressivi (20m a 80% e 90%)',
+      'Posizione di partenza: piede dominante dietro, ginocchia piegate, busto inclinato',
+      'Partenza al segnale del coach — corri in linea retta alla massima velocità',
+      'SUPERA la linea dei 30m prima di rallentare (non frenare sulla linea)',
+      '2 tentativi con 4 min di recupero COMPLETO — registra il miglior tempo'
+    ],
+    bx:[
+      {c:'#e53935',l:'Insufficiente',r:'> 5.0 s',n:'Velocità insufficiente per spostamenti veloci nel ring'},
+      {c:'#f59e0b',l:'Accettabile',  r:'4.4 – 5.0 s',n:'Velocità di base adeguata'},
+      {c:'#4caf50',l:'Buono',        r:'3.9 – 4.4 s',n:'Buona velocità, sposta bene nel ring'},
+      {c:'#1565c0',l:'Ottimo per il ring',r:'< 3.9 s',n:'Velocità massima eccellente per la boxe'}
+    ]
+  },
+  {
+    id:'cooper', name:'Test di Cooper (12 minuti)', unit:'m',
+    hint:'Corsa 12 min continua. Misura la distanza totale percorsa.',
+    proto:[
+      'Riscaldamento OBBLIGATORIO: 5-8 min jogging leggero + mobilità dinamica',
+      'Usa una pista di atletica (400m) oppure un parco con GPS (app Strava o Nike Run Club)',
+      'Al segnale: corri per ESATTAMENTE 12 minuti al ritmo più alto che riesci a mantenere COSTANTE',
+      '⚠️ Non partire troppo forte — il ritmo dei primi 3 min deve essere lo stesso degli ultimi 3 min',
+      'Un assistente segna la posizione esatta al fischio finale, oppure il GPS registra automaticamente',
+      'Misura la distanza totale percorsa in metri (arrotonda ai 50m più vicini)',
+      'Defaticamento: 5-10 min camminata + stretching',
+      '💡 Formula VO2max: (distanza − 504.9) ÷ 44.73 ml/kg/min'
+    ],
+    bx:[
+      {c:'#e53935',l:'Insufficiente per il ring',r:'< 2000 m',n:'La resistenza aerobica è il fattore limitante — cala drasticamente al 2° round'},
+      {c:'#f59e0b',l:'Minimo accettabile',        r:'2000 – 2400 m',n:'Regge 3 round ma senza riserva, difficoltà nel recupero tra round'},
+      {c:'#4caf50',l:'Buono per 3×3 min',         r:'2400 – 2800 m',n:'Affronta 3 round con margine, recupera bene nel minuto di pausa'},
+      {c:'#1565c0',l:'Ottimo per il ring',         r:'> 2800 m',n:'Resistenza eccellente — mantiene ritmo e lucidità per tutti e 3 i round'}
+    ]
+  },
+  {
+    id:'yoyo', name:'Yo-Yo Intermittent Recovery — Livello 1', unit:'livello',
+    hint:'Registra livello.fase raggiunto (es: 16.1). Stop al 2° avviso.',
+    proto:[
+      'Segna 2 coni a 20m di distanza + zona di recupero a 2.5m DIETRO la linea di partenza',
+      'Scarica l\'audio del Yo-Yo IR1 (gratuito su YouTube — cerca "Yo-Yo IR1 beep test")',
+      'Corri da un cono all\'altro al ritmo del beep audio (andare e tornare = 1 ripetizione)',
+      'Nei 10 secondi di recupero: cammina/trottina fino alla zona di recupero e TORNA alla linea',
+      'Se non arrivi alla linea PRIMA del beep: ricevi un avviso (2 avvisi = test terminato)',
+      'Il ritmo aumenta progressivamente ogni livello',
+      'Registra l\'ultimo livello completato (es: 16.1 = livello 16, fase 1)',
+      '💡 Il Yo-Yo IR1 è più specifico per la boxe del Cooper perché replica il ritmo intermittente del match'
+    ],
+    bx:[
+      {c:'#e53935',l:'Insufficiente',r:'< 12.0',n:'Difficoltà nel recupero tra le azioni — cala la qualità tecnica dal 2° round'},
+      {c:'#f59e0b',l:'Accettabile',  r:'12.0 – 14.0',n:'Regge 3 round ma con recupero lento tra le azioni intense'},
+      {c:'#4caf50',l:'Buono',        r:'14.0 – 16.0',n:'Buon recupero intermittente, mantiene qualità per 3 round'},
+      {c:'#1565c0',l:'Ottimo per il ring',r:'> 16.0',n:'Resistenza intermittente eccellente — non si stanca mai nei round'}
+    ]
+  },
+  {
+    id:'pushup_max', name:'Push-up Massimali', unit:'reps',
+    hint:'Piegamenti consecutivi senza pausa fino a cedimento della forma.',
+    proto:[
+      'Posizione: mani larghezza spalle (o leggermente più larghe), corpo RIGIDO dalla testa ai talloni',
+      'Discesa: petto che tocca o si avvicina a 2-3 cm dal suolo — nessun cedimento del bacino',
+      'Salita: braccia completamente tese in cima — nessun micro-riposo in cima',
+      'SENZA PAUSE tra le ripetizioni — se ti fermi il test è terminato',
+      'Il test finisce quando non riesci a completare una ripetizione con forma corretta',
+      '⚠️ Non contano: mezzo piegamento, bacino che cede, testa che va avanti invece delle spalle',
+      '1 solo tentativo — riposati almeno 30 min prima se preceduto da altri test'
+    ],
+    bx:[
+      {c:'#e53935',l:'Insufficiente',r:'< 20 reps',n:'Resistenza muscolare petto/spalle critica — la guardia cede nel finale dei round'},
+      {c:'#f59e0b',l:'Accettabile',  r:'20 – 35 reps',n:'Sufficiente per 3 round brevi, ma affaticamento visibile verso la fine'},
+      {c:'#4caf50',l:'Buono',        r:'35 – 50 reps',n:'Guardia mantenuta anche sotto fatica, colpi potenti fino al gong'},
+      {c:'#1565c0',l:'Ottimo per il ring',r:'> 50 reps',n:'Resistenza muscolare eccellente — nessun cedimento della guardia per 3 round'}
+    ]
+  },
+  {
+    id:'pullup_max', name:'Trazioni Massimali', unit:'reps',
+    hint:'Dalla partenza con braccia tese, mento SOPRA la sbarra. Presa pronata. No slancio.',
+    proto:[
+      'Impugnatura PRONATA (dorso mani verso il viso), larghezza spalle o leggermente più larga',
+      'Posizione di partenza: braccia COMPLETAMENTE tese, corpo fermo (no oscillazione)',
+      'Salita: tira finché il mento supera chiaramente la sbarra — no punta del mento',
+      'Discesa: torna alla posizione di partenza con BRACCIA TESE (no mezze ripetizioni)',
+      'NO slancio di gambe, NO kipping — movimento controllato',
+      'Il test finisce quando non riesci a portare il mento sopra la sbarra con forma corretta',
+      '🔧 Sbarra parco, porta (barra da porta) o anelli — qualsiasi barra stabile va bene'
+    ],
+    bx:[
+      {c:'#e53935',l:'Insufficiente',r:'< 5 reps',n:'Forza di trazione critica — difficoltà a mantenere guard alta nei round finali'},
+      {c:'#f59e0b',l:'Accettabile',  r:'5 – 10 reps',n:'Minimo funzionale per la boxe'},
+      {c:'#4caf50',l:'Buono',        r:'10 – 15 reps',n:'Buona forza dorsale, guard alta stabile per 3 round'},
+      {c:'#1565c0',l:'Ottimo per il ring',r:'> 15 reps',n:'Forza di trazione eccellente — stabilità della guardia e potenza nei colpi di ritorno'}
+    ]
+  },
+  {
+    id:'plank_time', name:'Plank Isometrico', unit:'sec',
+    hint:'Su avambracci. Bacino neutro. Conta i secondi fino al cedimento della posizione.',
+    proto:[
+      'Posizione: avambracci a terra (gomiti sotto le spalle), punte dei piedi a terra',
+      'Bacino NEUTRO — né sollevato (picco) né abbassato (ceduto). Corpo come una tavola',
+      'Testa allineata con la colonna — sguardo verso il basso a 45°, non in alto',
+      'NO cedimento del bacino, NO rotazione delle anche, NO spostamento del peso',
+      'Il test FINISCE quando il bacino scende di oltre 5 cm o quando non riesci a mantenere la posizione',
+      'Un assistente osserva di lato e ferma il cronometro al cedimento',
+      '1 solo tentativo — è un test di resistenza isometrica, non di forza esplosiva'
+    ],
+    bx:[
+      {c:'#e53935',l:'Insufficiente',r:'< 60 sec',n:'Core instabile — il trasferimento di forza braccia-tronco è inefficiente sotto fatica'},
+      {c:'#f59e0b',l:'Accettabile',  r:'60 – 120 sec',n:'Core sufficiente per le prime fasi, ma perde efficienza verso la fine dei round'},
+      {c:'#4caf50',l:'Buono',        r:'120 – 180 sec',n:'Core stabile, trasferimento di forza efficiente per tutti e 3 i round'},
+      {c:'#1565c0',l:'Ottimo per il ring',r:'> 180 sec',n:'Core eccellente — potenza dei colpi mantenuta e nessun cedimento posturale'}
+    ]
+  },
+  {
+    id:'sit_reach', name:'Sit & Reach (Flessibilità)', unit:'cm',
+    hint:'Seduto gambe tese. Fletti il busto in avanti. Cm oltre (positivo) o prima (negativo) della punta dei piedi.',
+    proto:[
+      'Seduto sul pavimento, gambe COMPLETAMENTE tese, piedi uniti contro un supporto (muro o cassetta)',
+      'Appoggiate le punte dei piedi contro la cassetta — la zero è alla punta dei piedi',
+      'Senza slancio, inclina il busto in avanti il più lontano possibile',
+      'Mantieni la posizione 2 secondi — un assistente misura la distanza raggiunta',
+      'Positivo (+): le dita arrivano OLTRE la punta dei piedi',
+      'Negativo (−): le dita non arrivano alla punta dei piedi',
+      '3 prove con 30" di recupero — registra la migliore',
+      '🔧 Servono: righello + libro o cassetta spessa 30cm appoggiata al muro'
+    ],
+    bx:[
+      {c:'#e53935',l:'Insufficiente',r:'< 0 cm',n:'Mobilità critica — aumenta rischio infortuni muscolo-tendinei e limita la schivata'},
+      {c:'#f59e0b',l:'Accettabile',  r:'0 – 8 cm',n:'Mobilità sufficiente ma limitante per alcune posture difensive'},
+      {c:'#4caf50',l:'Buono',        r:'8 – 15 cm',n:'Buona flessibilità, ampiezza di movimento adeguata per tutte le tecniche'},
+      {c:'#1565c0',l:'Ottimo per il ring',r:'> 15 cm',n:'Mobilità eccellente — piena libertà di movimento, schivate più profonde e sicure'}
+    ]
+  }
 ];
 
 // Dati stub, ancora referenziato da vecchie funzioni — non usato per la nuova UI
@@ -8141,7 +8352,7 @@ var PREP_TEST_PROG = {
         title:'Circuito Metabolico — Fase 1',
         blocks:[
           {label:'Riscaldamento', dur:'5 min', items:['Jogging 3 min + mobilità dinamica 2 min']},
-          {label:'Circuito × 4 rounds', dur:'24 min', items:['30" Squat jump → 20" rest','30" Push-up → 20" rest','30" Mountain climber → 20" rest','30" Burpee → 20" rest','30" Plank → 20" rest','30" Salti alternati avanti/indietro → 20" rest','→ 90" rest tra i rounds']},
+          {label:'Circuito × 4 rounds  ·  45"/15"', dur:'26 min', items:['45" Squat jump → 15" rest','45" Push-up → 15" rest','45" Mountain climber → 15" rest','45" Burpee → 15" rest','45" Plank → 15" rest','45" Salti alternati avanti/indietro → 15" rest','→ 90" rest tra i rounds']},
           {label:'Mobilità', dur:'8 min', items:['5 min sit & reach progressivo (3 serie da 30")','Stretching flessori anca 2 min/lato']}
         ]
       }
@@ -8170,7 +8381,7 @@ var PREP_TEST_PROG = {
         title:'Circuito Metabolico — Fase 2',
         blocks:[
           {label:'Riscaldamento', dur:'5 min', items:['Jogging + mobilità']},
-          {label:'Circuito × 4 rounds', dur:'28 min', items:['35" Squat jump → 20" rest','35" Push-up inclinato (piedi su sedia) → 20" rest','35" Mountain climber → 20" rest','35" Burpee + push-up → 20" rest','35" Side plank alternato (cambio ogni 10") → 20" rest','35" Broad jump consecutivi (torna camminando) → 20" rest','→ 90" rest tra i rounds']},
+          {label:'Circuito × 5 rounds  ·  45"/15"', dur:'33 min', items:['45" Squat jump → 15" rest','45" Push-up inclinato (piedi su sedia) → 15" rest','45" Mountain climber → 15" rest','45" Burpee + push-up → 15" rest','45" Side plank alternato (cambio ogni 10") → 15" rest','45" Broad jump consecutivi (torna camminando) → 15" rest','→ 90" rest tra i rounds']},
           {label:'Mobilità', dur:'8 min', items:['Sit & reach 3× 40"','Stretching catena posteriore completa']}
         ]
       }
@@ -8199,7 +8410,7 @@ var PREP_TEST_PROG = {
         title:'Circuito × 5 + Simulazione Cooper 6 min',
         blocks:[
           {label:'Riscaldamento', dur:'5 min', items:['Jogging + mobilità']},
-          {label:'Circuito × 5 rounds', dur:'33 min', items:['40" Squat jump → 20" rest','40" Push-up esplosivo (stacca le mani da terra) → 20" rest','40" Mountain climber veloci → 20" rest','40" Burpee jump → 20" rest','40" Plank con shoulder tap → 20" rest','→ 90" rest tra i rounds']},
+          {label:'Circuito × 6 rounds  ·  45"/15"', dur:'38 min', items:['45" Squat jump → 15" rest','45" Push-up esplosivo (stacca le mani da terra) → 15" rest','45" Mountain climber veloci → 15" rest','45" Burpee jump → 15" rest','45" Plank con shoulder tap → 15" rest','→ 90" rest tra i rounds']},
           {label:'Simulazione Cooper 6 min', dur:'10 min', items:['Corri 6 min al ritmo che pensi di mantenere per 12 min','Misura distanza percorsa × 2 = stima Cooper','Questo ti dice se il tuo ritmo target è realistico']},
           {label:'Mobilità', dur:'5 min', items:['Sit & reach + stretching flessori anca']}
         ]
@@ -8331,6 +8542,29 @@ var tbCurrentAth = '';
 
 function getAthTestLog() {
   try { return JSON.parse(localStorage.getItem('evian_test_log') || '{}'); } catch(e) { return {}; }
+}
+
+function tbRenderProto(t) {
+  if (!t.proto && !t.bx) return '';
+  var h = '<details class="tb-proto-details"><summary>📋 Come eseguire &amp; Valori per il ring (3×3 min)</summary>';
+  h += '<div class="tb-proto-body">';
+  if (t.proto) {
+    h += '<ol class="tb-proto-steps">';
+    t.proto.forEach(function(s){ h += '<li>' + s + '</li>'; });
+    h += '</ol>';
+  }
+  if (t.bx) {
+    h += '<div class="tb-norms-title">🥊 Valori di riferimento — incontro 3 round × 3 min</div>';
+    t.bx.forEach(function(n){
+      h += '<div class="tb-norm-row">';
+      h += '<div class="tb-norm-dot" style="background:' + n.c + '"></div>';
+      h += '<div class="tb-norm-text"><span class="tb-norm-range">' + n.l + ': ' + n.r + '</span>';
+      if (n.n) h += '<br><span class="tb-norm-note">' + n.n + '</span>';
+      h += '</div></div>';
+    });
+  }
+  h += '</div></details>';
+  return h;
 }
 
 function tbShowCooperGrade() {
@@ -8477,6 +8711,7 @@ function renderTestBattery() {
     if (last) h += '<span class="tb-field-prev">Ult: ' + last.value + ' ' + t.unit + ' &middot; ' + last.date + '</span>';
     h += '</div>';
     h += '<div class="tb-field-hint">' + t.hint + '</div>';
+    h += tbRenderProto(t);
     h += '<div class="tb-lift-row"><input class="tb-input-lg" id="tst-fit-' + t.id + '" type="number" inputmode="decimal" step="0.1" placeholder="&mdash;">';
     h += '<span class="tb-unit-lbl">' + t.unit + '</span></div></div>';
   });
@@ -8495,6 +8730,7 @@ function renderTestBattery() {
     if (last) h += '<span class="tb-field-prev">Ult: ' + last.value + ' ' + t.unit + ' &middot; ' + last.date + '</span>';
     h += '</div>';
     h += '<div class="tb-field-hint">' + t.hint + '</div>';
+    h += tbRenderProto(t);
     h += '<div class="tb-lift-row"><input class="tb-input-lg" id="tst-fit-' + t.id + '" type="number" inputmode="decimal" step="0.01" placeholder="&mdash;">';
     h += '<span class="tb-unit-lbl">' + t.unit + '</span></div></div>';
   });
@@ -8522,6 +8758,7 @@ function renderTestBattery() {
     }
     h += '</div>';
     h += '<div class="tb-field-hint">' + t.hint + '</div>';
+    h += tbRenderProto(t);
     h += '<div class="tb-lift-row"><input class="tb-input-lg" id="tst-fit-' + t.id + '" type="number" inputmode="decimal" step="' + (t.id==='yoyo'?'0.1':'1') + '" placeholder="&mdash;" oninput="tbShowCooperGrade()">';
     h += '<span class="tb-unit-lbl">' + t.unit + '</span>';
     if (t.id === 'cooper') h += '<span id="cooper-grade-live" style="font-size:11px;color:#aaa;margin-left:8px"></span>';
@@ -8542,6 +8779,7 @@ function renderTestBattery() {
     if (last) h += '<span class="tb-field-prev">Ult: ' + last.value + ' ' + t.unit + ' &middot; ' + last.date + '</span>';
     h += '</div>';
     h += '<div class="tb-field-hint">' + t.hint + '</div>';
+    h += tbRenderProto(t);
     h += '<div class="tb-lift-row"><input class="tb-input-lg" id="tst-fit-' + t.id + '" type="number" inputmode="decimal" step="1" placeholder="&mdash;">';
     h += '<span class="tb-unit-lbl">' + t.unit + '</span></div></div>';
   });
