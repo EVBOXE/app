@@ -1,2 +1,2 @@
 # app
-Evian Boxe Training App
+EvBoxe Training App
